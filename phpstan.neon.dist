@@ -37,6 +37,12 @@ parameters:
     - identifier: deadCode.unreachable
     - identifier: argument.unresolvableType
     - identifier: method.unresolvableReturnType
+    # PHPStan 2.3+ also reports class_exists() on those unknown SDK classes as
+    # always false. The probes run at runtime, where the classes may exist.
+    - identifier: function.impossibleType
+      paths:
+        - ./src/Capture/class-chaining-transporter.php
+        - ./src/Capture/class-result-capturer.php
 
     # --- The WordPress 7.0 AI Client + bundled php-ai-client SDK have no
     #     PHPStan stubs yet; all access is runtime-guarded. ---
